@@ -27,6 +27,7 @@ class App extends React.Component {
 
   render() {
     let people = Object.keys(this.state.results)
+    console.log(this.state.results)
     let komCounts = people.map(
       (name, index) =>
         <div key={index} className="count">
@@ -38,9 +39,11 @@ class App extends React.Component {
       <div className="App">
         <header className="App-header">
           <div className="image-box">
-            <img className='some-image' src={lee_gu} />
-            <img className='some-image' src={both} />
-            <img className='some-image' src={miles_bread} />
+            <img className='some-image' src={lee_gu} alt='Lee eating Gu' />
+            <img className='some-image' src={both}
+                 alt='Lee looking back at Miles' />
+            <img className='some-image' src={miles_bread} 
+                 alt='Miles eating a sandwich'/>
           </div>
           <div className="countwrapper">
             {komCounts}
