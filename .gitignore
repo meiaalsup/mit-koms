@@ -56,3 +56,6 @@ api/env.bak/
 api/venv.bak/
 
 build
+
+# Local Netlify folder
+.netlify
