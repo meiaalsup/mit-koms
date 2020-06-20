@@ -35,15 +35,15 @@ class QueryEngine(object):
 
     def _initialize_webdriver(self):
         chrome_options = Options()
-        #chrome_options.binary_location = os.environ.get(
-        #    'GOOGLE_CHROME_BIN',
-        #    "chromedriver"
-        #)
+        chrome_options.binary_location = os.environ.get(
+            'GOOGLE_CHROME_BIN',
+            "chromedriver"
+        )
         chrome_options.add_argument('--disable-gpu')
         chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument("--headless")
         self.driver = selenium.webdriver.Chrome(
-            ChromeDriverManager().install(),
+            executable_path=os.environ.get("CHROMEDRIVER_PATH"),
             options=chrome_options)
 
     def _go_to_url_and_login(self, url):
