@@ -10,7 +10,7 @@ his accoutn private
 JDK: refactored into a stateful engine so we don't start 
 and orphan tons of webdriver processes
 """
-
+import os
 import time
 import selenium
 from selenium.webdriver.chrome.options import Options
@@ -18,7 +18,6 @@ from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 
 CHROMEDRIVER_PATH = '/app/.chromedriver/bin/chromedriver'
-
 
 
 class QueryEngine(object):
