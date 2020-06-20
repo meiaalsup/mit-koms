@@ -12,11 +12,11 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "start-api": "cd api && flask run --no-debugger",
+    "start-api": "cd app && flask run --no-debugger",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "deploy": "react-scripts build && netlify deploy --dir=build --prod",
-    "deploy-server": "git subtree push --prefix api heroku master",
+    "deploy-server": "git subtree push --prefix app heroku master",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
