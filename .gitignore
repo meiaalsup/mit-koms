@@ -1,1 +1,54 @@
 node_modules
+
+# Byte-compiled / optimized / DLL files
+**/*.pyc
+api/__pycache__/**
+api/*.py[cod]
+api/*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+api/.Python
+api/build/
+api/develop-eggs/
+api/dist/
+api/downloads/
+api/eggs/
+api/.eggs/
+api/lib/
+api/lib64/
+api/parts/
+api/sdist/
+api/var/
+api/wheels/
+api/share/python-wheels/
+api/*.egg-info/
+api/.installed.cfg
+api/*.egg
+api/MANIFEST
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+api/*.manifest
+api/*.spec
+
+# Installer logs
+api/pip-log.txt
+api/pip-delete-this-directory.txt
+
+# Flask stuff:
+api/instance/
+api/.webassets-cache
+
+
+# Environments
+api/.env
+api/.venv
+api/env/
+api/venv/
+api/ENV/
+api/env.bak/
+api/venv.bak/
