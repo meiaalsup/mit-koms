@@ -64,14 +64,3 @@ class QueryEngine(object):
         self.driver.quit()
 
 
-query_map = {
-    'miles': "https://www.strava.com/athletes/336687/segments/leader",
-    'lee': "https://www.strava.com/athletes/15315238/segments/leader",
-}
-
-engine = QueryEngine(query_map)
-lee_num = engine.query('lee')
-miles_num = engine.query('miles')
-print('Miles', miles_num)
-print('Lee', lee_num)
-engine.shutdown()
