@@ -1,26 +1,43 @@
-import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
 
-function App() {
-  const [lee] = leeCount();
+class App extends React.Component {
 
-  leeCount(() => {
-    fetch('/lee').then(res => res.json()).then(data => {
-      return data['lee']
-    });
-  }, []);
+  constructor(props) {
+    super(props);
+    this.state = {
+      lee: 0,
+      miles: 0,
+    };
+  }
 
-  return (
-    <div className="App">
-      <header className="App-header">
+  componentDidMount() {
+    fetch("koms", {
+      method: "GET",
+    }).then(response => response.json())
+      .then(json => {
+        this.setState({lee: json.lee, miles: json.miles})
+        console.log(json)
+      })
+  }
 
-        <div className="count">
-          <p>Lee's KOMs: {lee}.</p>
-        </div>
-      </header>
-    </div>
-  );
+  
+
+  render() {
+
+    return (
+      <div className="App">
+        <header className="App-header">
+
+          <div className="count">
+            <p>Lee's KOMs: {this.state.lee}.</p>
+            <p>Miles's KOMs: {this.state.miles}.</p>
+          </div>
+        </header>
+      </div>
+    );
+  }
+
 }
 
 export default App;
