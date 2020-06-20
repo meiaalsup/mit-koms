@@ -113,6 +113,9 @@ scheduler = BackgroundScheduler()
 scheduler.add_job(func=refresh_cache, trigger="interval", seconds=1800)
 scheduler.start()
 
+@app.route('/')
+def home():
+    return 'Hello World'
 
 @app.route('/koms')
 def koms():
