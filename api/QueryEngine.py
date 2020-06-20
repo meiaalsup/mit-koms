@@ -42,7 +42,7 @@ class QueryEngine(object):
         self.driver = selenium.webdriver.Chrome(
             ChromeDriverManager()
             .install(),
-            execution_path=CHROMEDRIVER_PATH
+            execution_path=CHROMEDRIVER_PATH,
             options=chrome_options)
 
     def _go_to_url_and_login(self, url):
