@@ -14,7 +14,12 @@ and orphan tons of webdriver processes
 import time
 import selenium
 from selenium.webdriver.chrome.options import Options
+from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
+
+GOOGLE_CHROME_PATH = '/app/.apt/usr/bin/google_chrome'
+CHROMEDRIVER_PATH = '/app/.chromedriver/bin/chromedriver'
+
 
 
 class QueryEngine(object):
@@ -29,9 +34,14 @@ class QueryEngine(object):
     def _initialize_webdriver(self):
         chrome_options = Options()
         chrome_options.add_argument("--headless")
+        chrome_options.add_argument('--disable-gpu')
+        chrome_options.add_argument('--no-sandbox')
+        chrome_options.binary_location = GOOGLE_CHROME_PATH
         self.driver = selenium.webdriver.Chrome(
             ChromeDriverManager()
-            .install(), options=chrome_options)
+            .install(),
+            execution_path=CHROMEDRIVER_PATH
+            options=chrome_options)
 
     def _go_to_url_and_login(self, url):
         self.driver.get(url)
