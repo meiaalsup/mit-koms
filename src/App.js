@@ -6,8 +6,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      lee: 0,
-      miles: 0,
+      results: []
     };
   }
 
@@ -16,7 +15,7 @@ class App extends React.Component {
       method: "GET",
     }).then(response => response.json())
       .then(json => {
-        this.setState({lee: json.lee, miles: json.miles})
+        this.setState({results: json})
         console.log(json)
       })
   }
@@ -24,15 +23,21 @@ class App extends React.Component {
   
 
   render() {
+    let people = Object.keys(this.state.results)
+    let komCounts = people.map(
+      (name, index) => 
+        <div key={index} className="count">
+          <p>{name}'s KOMs: {this.state.results[name]}.</p>
+        </div>
+    );
 
     return (
       <div className="App">
         <header className="App-header">
-
-          <div className="count">
-            <p>Lee's KOMs: {this.state.lee}.</p>
-            <p>Miles's KOMs: {this.state.miles}.</p>
+          <div className="countwrapper">
+            {komCounts}
           </div>
+
         </header>
       </div>
     );
