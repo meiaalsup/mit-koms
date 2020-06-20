@@ -16,6 +16,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "deploy": "react-scripts build && netlify deploy --dir=build --prod",
+    "deploy-server": "git subtree push --prefix api heroku master",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
