@@ -1,5 +1,5 @@
 from flask import Flask
-from .QueryEngine import QueryEngine
+from QueryEngine import QueryEngine
 from apscheduler.schedulers.background import BackgroundScheduler
 
 app = Flask(__name__)
