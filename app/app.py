@@ -7,7 +7,7 @@ import selenium
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='../build', static_url_path='/')
 
 
 # -*- coding: utf-8 -*-
@@ -114,8 +114,8 @@ scheduler.add_job(func=refresh_cache, trigger="interval", seconds=1800)
 scheduler.start()
 
 @app.route('/')
-def home():
-    return 'Hello World'
+def index():
+    return app.send_static_file('index.html')
 
 @app.route('/koms')
 def koms():

@@ -11,6 +11,9 @@ idna==2.9
 itsdangerous==1.1.0
 Jinja2==2.11.2
 MarkupSafe==1.1.1
+node==0.9.25
+odict==1.7.0
+plumber==1.6
 PyJWT==1.7.1
 python-dotenv==0.13.0
 pytz==2020.1
@@ -22,3 +25,11 @@ tzlocal==2.1
 urllib3==1.25.9
 webdriver-manager==3.2.1
 Werkzeug==1.0.1
+zope.component==4.6.1
+zope.deferredimport==4.3.1
+zope.deprecation==4.4.0
+zope.event==4.4
+zope.hookable==5.0.1
+zope.interface==5.1.0
+zope.lifecycleevent==4.3
+zope.proxy==4.3.5
