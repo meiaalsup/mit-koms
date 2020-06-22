@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_cors import CORS
 from apscheduler.schedulers.background import BackgroundScheduler
 
 import os
@@ -8,6 +9,7 @@ from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 
 app = Flask(__name__, static_folder='../build', static_url_path='/')
+CORS(app)
 
 
 # -*- coding: utf-8 -*-
