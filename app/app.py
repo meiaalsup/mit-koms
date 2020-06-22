@@ -47,7 +47,6 @@ class QueryEngine(object):
         chrome_options.add_argument('--disable-dev-shm-usage')
         chrome_options.add_argument("--headless")
 
-
         if os.environ.get('FLASK_ENV') == 'production':
             self.driver = selenium.webdriver.Chrome(
                 executable_path=os.environ.get("CHROMEDRIVER_PATH"),
@@ -124,11 +123,6 @@ scheduler.add_job(func=refresh_cache, trigger="interval", seconds=1800)
 scheduler.start()
 
 
-@app.route('/')
-def index():
-    return app.send_static_file('index.html')
-
-
 @app.route('/koms/', methods=['GET'])
 def koms():
     results = {}
@@ -142,4 +136,4 @@ def koms():
 
 
 if __name__ == "__main__":
-    app.run(threaded=False, port=5000)
+    app.run(threaded=True, port=5000)
