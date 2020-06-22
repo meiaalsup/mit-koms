@@ -117,7 +117,7 @@ scheduler.start()
 def index():
     return app.send_static_file('index.html')
 
-@app.route('/koms')
+@app.route('/koms/', methods=['GET'])
 def koms():
     results = {}
     for name in QUERY_MAP.keys():
@@ -127,3 +127,7 @@ def koms():
 
         results[name] = results_cache[name]
     return results
+
+if __name__ == "__main__": 
+    app.run(threaded=True, port=5000)
+
