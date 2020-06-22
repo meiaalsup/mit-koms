@@ -1,5 +1,5 @@
-# [MvsL](mit-koms.netlify.app)
-Miles versus Lee KOM tracker
+# [MIT KOMs tracker](mit-koms.netlify.app)
+For starters: Miles versus Lee
 
 
 # Stack
