@@ -9,7 +9,7 @@ from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 
 app = Flask(__name__, static_folder='../build', static_url_path='/')
-cors = CORS(app, resources={r"/koms": {"origins": "*"}})
+CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 
@@ -136,9 +136,7 @@ def koms():
             query_and_add_name_to_cache(name)
 
         results[name] = results_cache[name]
-    response = Flask.jsonify(results)
-    response.headers.add('Access-Control-Allow-Origin', '*')
-    return response
+    return results
 
 
 if __name__ == "__main__":
