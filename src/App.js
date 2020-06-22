@@ -17,9 +17,8 @@ class App extends React.Component {
   componentDidMount() {
     fetch(SERVER_URL + "/koms", {
       method: "GET",
-      mode: 'no-cors',
-    }).then(response => response.json())
-      .then(json => {
+    }).then(response => response.json()).then(
+      json => {
         this.setState({ results: json })
         console.log(json)
       })
