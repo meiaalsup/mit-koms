@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css'
+import {SERVER_URL} from './config';
 import both from './images/both.jpeg'
 import lee_gu from './images/lee_gu.jpeg'
 import miles_bread from './images/miles_bread.jpeg'
@@ -14,7 +15,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    fetch("koms", {
+    fetch(SERVER_URL + "/koms", {
       method: "GET",
     }).then(response => response.json())
       .then(json => {
