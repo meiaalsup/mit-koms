@@ -1,5 +1,5 @@
 from flask import Flask
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 from apscheduler.schedulers.background import BackgroundScheduler
 
 import os
@@ -10,6 +10,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 app = Flask(__name__, static_folder='../build', static_url_path='/')
 CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 
 # -*- coding: utf-8 -*-
@@ -126,6 +127,7 @@ scheduler.start()
 
 
 @app.route('/koms/', methods=['GET'])
+@cross_origin()
 def koms():
     results = {}
     for name in QUERY_MAP.keys():
