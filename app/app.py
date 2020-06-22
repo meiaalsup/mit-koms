@@ -12,6 +12,12 @@ app = Flask(__name__, static_folder='../build', static_url_path='/')
 CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
+# Maps names to Strava URLs
+QUERY_MAP = {
+    'Joanna': ["903771", "F"],
+    'Miles': ["336687", "M"],
+    'Lee': ["15315238", "M"],
+}
 
 # -*- coding: utf-8 -*-
 """
@@ -59,8 +65,13 @@ class QueryEngine(object):
                 ChromeDriverManager().install(),
                 options=chrome_options)
 
+    def get_url(self, id_, page):
+        url = f'https://www.strava.com/athletes/{id_}/segments/leader?page={page}'
+        print(url)
+        return url
+
     def _go_to_url_and_login(self, url):
-        self.driver.get(url)
+        exists = self.driver.get(url)
         if not self.logged_in:
             self.driver.find_element_by_id("email").send_keys(
                 "aaronb11999933@gmail.com")
@@ -69,32 +80,34 @@ class QueryEngine(object):
             self.driver.find_element_by_id("login-button").click()
             time.sleep(5)
             self.logged_in = True
+        return exists
 
     def query(self, name):
         if name not in self.url_map.keys():
             raise LookupError(
                 f"Name {name} is not in lookup map "
                 "used to initialize this query engine")
-        self._go_to_url_and_login(self.url_map[name])
-        # query
         KOMs = 0
-        for tr in self.driver.find_elements_by_xpath(
-                '/html/body/div[1]/div[3]/div[3]/div[1]/div/table'):
-            tds = tr.find_elements_by_tag_name('td')
-            for td in tds:
-                if td.text == 'Ride':
-                    KOMs += 1
+        page = 1
+        while True:
+            exists = self._go_to_url_and_login(self.get_url(self.url_map[name][0], page))
+            before = KOMs
+            # query
+            for tr in self.driver.find_elements_by_xpath(
+                    '/html/body/div[1]/div[3]/div[3]/div[1]/div/table'):
+                tds = tr.find_elements_by_tag_name('td')
+                for td in tds:
+                    if td.text == 'Ride':
+                        KOMs += 1
+            if KOMs == before:
+                break
+            page += 1
         return KOMs
 
     def shutdown(self):
         self.driver.quit()
 
 
-# Maps names to Strava URLs
-QUERY_MAP = {
-    'Miles': "https://www.strava.com/athletes/336687/segments/leader",
-    'Lee': "https://www.strava.com/athletes/15315238/segments/leader",
-}
 
 
 # Cache that stores recently-fetched results
@@ -122,7 +135,7 @@ def query_and_add_name_to_cache(name):
 # doesn't block whatever random linux box this is running on.
 # Don't query on pageload because Strava is so so so slow
 scheduler = BackgroundScheduler()
-scheduler.add_job(func=refresh_cache, trigger="interval", seconds=1800)
+scheduler.add_job(func=refresh_cache, trigger="interval", seconds=3600)
 scheduler.start()
 
 
