@@ -14,7 +14,7 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 
 # Maps names to Strava URLs
 QUERY_MAP = {
-    'Joanna': ["903771", "F"],
+#    'Joanna': ["903771", "F"],
     'Miles': ["336687", "M"],
     'Lee': ["15315238", "M"],
 }
