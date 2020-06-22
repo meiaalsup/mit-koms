@@ -35,16 +35,24 @@ class QueryEngine(object):
 
     def _initialize_webdriver(self):
         chrome_options = Options()
-        chrome_options.binary_location = os.environ.get(
-            'GOOGLE_CHROME_BIN',
-            "chromedriver"
-        )
+
+        if os.environ.get('FLASK_ENV') == 'PRODUCTION':
+            chrome_options.binary_location = os.environ.get(
+                'GOOGLE_CHROME_BIN',
+                "chromedriver"
+            )
+
         chrome_options.add_argument('--disable-gpu')
         chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument("--headless")
-        self.driver = selenium.webdriver.Chrome(
-            executable_path=os.environ.get("CHROMEDRIVER_PATH"),
-            options=chrome_options)
+        if os.environ.get('FLASK_ENV') == 'PRODUCTION':
+            self.driver = selenium.webdriver.Chrome(
+                executable_path=os.environ.get("CHROMEDRIVER_PATH"),
+                options=chrome_options)
+        else:
+            self.driver = selenium.webdriver.Chrome(
+                ChromeDriverManager().install(),
+                options=chrome_options)
 
     def _go_to_url_and_login(self, url):
         self.driver.get(url)
@@ -75,7 +83,6 @@ class QueryEngine(object):
 
     def shutdown(self):
         self.driver.quit()
-
 
 
 # Maps names to Strava URLs
@@ -113,9 +120,11 @@ scheduler = BackgroundScheduler()
 scheduler.add_job(func=refresh_cache, trigger="interval", seconds=1800)
 scheduler.start()
 
+
 @app.route('/')
 def index():
     return app.send_static_file('index.html')
+
 
 @app.route('/koms/', methods=['GET'])
 def koms():
@@ -128,6 +137,6 @@ def koms():
         results[name] = results_cache[name]
     return results
 
-if __name__ == "__main__": 
-    app.run(threaded=True, port=5000)
 
+if __name__ == "__main__":
+    app.run(threaded=True, port=5000)
