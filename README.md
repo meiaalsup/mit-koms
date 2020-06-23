@@ -1,4 +1,4 @@
-# [MIT KOMs tracker](mit-koms.netlify.app)
+# [MIT KOMs tracker](https://mit-koms.netlify.app)
 For starters: Miles versus Lee
 
 
