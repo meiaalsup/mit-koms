@@ -80,6 +80,7 @@ class QueryEngine(object):
             self.driver.find_element_by_id("login-button").click()
             time.sleep(5)
             self.logged_in = True
+        self.driver.implicitly_wait(5)
         return exists
 
     def query(self, name):
